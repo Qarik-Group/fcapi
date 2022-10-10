@@ -6,19 +6,41 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"codeberg.org/ess/fcapi/core"
+	"codeberg.org/ess/fcapi/http/routes/registry"
 )
 
 type GetInfo struct {
+	path     string
+	verb     registry.Verb
+	ready    bool
 	services *core.Services
 	urls     map[string]string
 }
 
 func NewGetInfo(services *core.Services, urls map[string]string) *GetInfo {
-	return &GetInfo{services: services, urls: urls}
+	return &GetInfo{
+		path:     "/v1/info",
+		verb:     registry.GET,
+		ready:    true,
+		services: services,
+		urls:     urls,
+	}
 }
 
-func (route *GetInfo) Register(e *echo.Echo) {
-	e.GET("/v2/info", route.Handle)
+func (route *GetInfo) Register(router *echo.Echo) {
+	registry.Register(router, route)
+}
+
+func (route *GetInfo) Path() string {
+	return route.path
+}
+
+func (route *GetInfo) Ready() bool {
+	return route.ready
+}
+
+func (route *GetInfo) Verb() registry.Verb {
+	return route.verb
 }
 
 func (route *GetInfo) Handle(c echo.Context) error {

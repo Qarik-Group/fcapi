@@ -8,19 +8,41 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"codeberg.org/ess/fcapi/core"
+	"codeberg.org/ess/fcapi/http/routes/registry"
 )
 
 type CreateServiceBroker struct {
+	path     string
+	verb     registry.Verb
+	ready    bool
 	services *core.Services
 	urls     map[string]string
 }
 
 func NewCreateServiceBroker(services *core.Services, urls map[string]string) *CreateServiceBroker {
-	return &CreateServiceBroker{services: services, urls: urls}
+	return &CreateServiceBroker{
+		path:     "/v3/service_brokers",
+		verb:     registry.POST,
+		ready:    true,
+		services: services,
+		urls:     urls,
+	}
 }
 
-func (route *CreateServiceBroker) Register(e *echo.Echo) {
-	e.POST("/v3/service_brokers", route.Handle)
+func (route *CreateServiceBroker) Register(router *echo.Echo) {
+	registry.Register(router, route)
+}
+
+func (route *CreateServiceBroker) Path() string {
+	return route.path
+}
+
+func (route *CreateServiceBroker) Verb() registry.Verb {
+	return route.verb
+}
+
+func (route *CreateServiceBroker) Ready() bool {
+	return route.ready
 }
 
 func (route *CreateServiceBroker) Handle(c echo.Context) error {

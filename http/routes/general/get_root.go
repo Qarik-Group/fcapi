@@ -7,19 +7,41 @@ import (
 
 	"codeberg.org/ess/fcapi/core"
 	"codeberg.org/ess/fcapi/http/responses"
+	"codeberg.org/ess/fcapi/http/routes/registry"
 )
 
 type GetRoot struct {
+	path     string
+	verb     registry.Verb
+	ready    bool
 	services *core.Services
 	urls     map[string]string
 }
 
 func NewGetRoot(services *core.Services, urls map[string]string) *GetRoot {
-	return &GetRoot{services: services, urls: urls}
+	return &GetRoot{
+		path:     "/",
+		verb:     registry.GET,
+		ready:    true,
+		services: services,
+		urls:     urls,
+	}
 }
 
-func (route *GetRoot) Register(e *echo.Echo) {
-	e.GET("/", route.Handle)
+func (route *GetRoot) Register(router *echo.Echo) {
+	registry.Register(router, route)
+}
+
+func (route *GetRoot) Path() string {
+	return route.path
+}
+
+func (route *GetRoot) Ready() bool {
+	return route.ready
+}
+
+func (route *GetRoot) Verb() registry.Verb {
+	return route.verb
 }
 
 func (route *GetRoot) Handle(c echo.Context) error {

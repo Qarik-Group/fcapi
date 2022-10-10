@@ -5,12 +5,14 @@ import (
 
 	"codeberg.org/ess/fcapi/core"
 
+	"codeberg.org/ess/fcapi/http/routes/fcapi"
 	"codeberg.org/ess/fcapi/http/routes/general"
 	"codeberg.org/ess/fcapi/http/routes/v2"
 	"codeberg.org/ess/fcapi/http/routes/v3"
 )
 
 func Register(router *echo.Echo, services *core.Services, urls map[string]string) {
+	fcapi.Register(router, services, urls)
 	v2.Register(router, services, urls)
 	v3.Register(router, services, urls)
 	general.Register(router, services, urls)

@@ -7,8 +7,15 @@ import (
 )
 
 func Register(router *echo.Echo, services *core.Services, urls map[string]string) {
+	// System Routes
 	NewGetInfo(services, urls).Register(router)
+
+	// App Routes
 	NewGetAppByGuid(services, urls).Register(router)
+
+	// Service Plan Routes
 	NewListServicePlansByQuery(services, urls).Register(router)
+
+	// User Routes
 	NewListUsersByQuery(services, urls).Register(router)
 }

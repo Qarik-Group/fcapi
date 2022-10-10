@@ -6,19 +6,41 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"codeberg.org/ess/fcapi/core"
+	"codeberg.org/ess/fcapi/http/routes/registry"
 )
 
 type ListUsersByQuery struct {
+	path     string
+	verb     registry.Verb
+	ready    bool
 	services *core.Services
 	urls     map[string]string
 }
 
 func NewListUsersByQuery(services *core.Services, urls map[string]string) *ListUsersByQuery {
-	return &ListUsersByQuery{services: services, urls: urls}
+	return &ListUsersByQuery{
+		path:     "/v2/users",
+		verb:     registry.GET,
+		ready:    false,
+		services: services,
+		urls:     urls,
+	}
 }
 
-func (route *ListUsersByQuery) Register(e *echo.Echo) {
-	e.GET("/v2/users", route.Handle)
+func (route *ListUsersByQuery) Register(router *echo.Echo) {
+	registry.Register(router, route)
+}
+
+func (route *ListUsersByQuery) Path() string {
+	return route.path
+}
+
+func (route *ListUsersByQuery) Ready() bool {
+	return route.ready
+}
+
+func (route *ListUsersByQuery) Verb() registry.Verb {
+	return route.verb
 }
 
 func (route *ListUsersByQuery) Handle(c echo.Context) error {

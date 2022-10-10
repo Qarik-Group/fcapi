@@ -8,19 +8,41 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"codeberg.org/ess/fcapi/core"
+	"codeberg.org/ess/fcapi/http/routes/registry"
 )
 
 type CreateV3Space struct {
+	path     string
+	verb     registry.Verb
+	ready    bool
 	services *core.Services
 	urls     map[string]string
 }
 
 func NewCreateV3Space(services *core.Services, urls map[string]string) *CreateV3Space {
-	return &CreateV3Space{services: services, urls: urls}
+	return &CreateV3Space{
+		path:     "/v3/spaces",
+		verb:     registry.POST,
+		ready:    true,
+		services: services,
+		urls:     urls,
+	}
 }
 
-func (route *CreateV3Space) Register(e *echo.Echo) {
-	e.POST("/v3/spaces", route.Handle)
+func (route *CreateV3Space) Register(router *echo.Echo) {
+	registry.Register(router, route)
+}
+
+func (route *CreateV3Space) Path() string {
+	return route.path
+}
+
+func (route *CreateV3Space) Ready() bool {
+	return route.ready
+}
+
+func (route *CreateV3Space) Verb() registry.Verb {
+	return route.verb
 }
 
 func (route *CreateV3Space) Handle(c echo.Context) error {
