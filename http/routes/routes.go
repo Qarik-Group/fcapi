@@ -3,12 +3,12 @@ package routes
 import (
 	"github.com/labstack/echo/v4"
 
-	"codeberg.org/ess/fcapi/core"
+	"github.com/starkandwayne/fcapi/core"
 
-	"codeberg.org/ess/fcapi/http/routes/fcapi"
-	"codeberg.org/ess/fcapi/http/routes/general"
-	"codeberg.org/ess/fcapi/http/routes/v2"
-	"codeberg.org/ess/fcapi/http/routes/v3"
+	"github.com/starkandwayne/fcapi/http/routes/fcapi"
+	"github.com/starkandwayne/fcapi/http/routes/general"
+	"github.com/starkandwayne/fcapi/http/routes/v2"
+	"github.com/starkandwayne/fcapi/http/routes/v3"
 )
 
 func Register(router *echo.Echo, services *core.Services, urls map[string]string) {

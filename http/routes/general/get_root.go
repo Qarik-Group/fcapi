@@ -5,9 +5,9 @@ import (
 
 	"github.com/labstack/echo/v4"
 
-	"codeberg.org/ess/fcapi/core"
-	"codeberg.org/ess/fcapi/http/responses"
-	"codeberg.org/ess/fcapi/http/routes/registry"
+	"github.com/starkandwayne/fcapi/core"
+	"github.com/starkandwayne/fcapi/http/responses"
+	"github.com/starkandwayne/fcapi/http/routes/registry"
 )
 
 type GetRoot struct {

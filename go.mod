@@ -1,4 +1,4 @@
-module codeberg.org/ess/fcapi
+module github.com/starkandwayne/fcapi
 
 go 1.16
 

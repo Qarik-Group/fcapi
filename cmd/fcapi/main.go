@@ -12,8 +12,8 @@ import (
 
 	"github.com/labstack/echo/v4"
 
-	"codeberg.org/ess/fcapi/http"
-	"codeberg.org/ess/fcapi/memory"
+	"github.com/starkandwayne/fcapi/http"
+	"github.com/starkandwayne/fcapi/memory"
 )
 
 func meat() int {

@@ -6,8 +6,8 @@ import (
 
 	"github.com/labstack/echo/v4"
 
-	"codeberg.org/ess/fcapi/core"
-	"codeberg.org/ess/fcapi/http/routes"
+	"github.com/starkandwayne/fcapi/core"
+	"github.com/starkandwayne/fcapi/http/routes"
 )
 
 func Server(bind string, services *core.Services, urls map[string]string) *http.Server {

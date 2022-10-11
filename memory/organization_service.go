@@ -7,7 +7,7 @@ import (
 
 	cf "github.com/cloudfoundry-community/go-cfclient"
 
-	"codeberg.org/ess/fcapi/core"
+	"github.com/starkandwayne/fcapi/core"
 )
 
 type OrganizationService struct {

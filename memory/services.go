@@ -3,7 +3,7 @@ package memory
 import (
 	"github.com/labstack/echo/v4"
 
-	"codeberg.org/ess/fcapi/core"
+	"github.com/starkandwayne/fcapi/core"
 )
 
 func NewServices() *core.Services {
