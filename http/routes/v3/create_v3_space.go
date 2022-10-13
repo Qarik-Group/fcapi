@@ -75,7 +75,7 @@ func (route *CreateV3Space) Handle(c echo.Context) error {
 	}
 
 	_, err = route.services.Spaces.ByOrgAndName(org, name)
-	if err != nil {
+	if err == nil {
 		return c.JSON(http.StatusInternalServerError, "name already taken")
 	}
 
