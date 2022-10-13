@@ -22,7 +22,7 @@ type ListV3SpacesByQuery struct {
 
 func NewListV3SpacesByQuery(services *core.Services, urls map[string]string) *ListV3SpacesByQuery {
 	return &ListV3SpacesByQuery{
-		path:     "/v3/roles",
+		path:     "/v3/spaces",
 		verb:     registry.GET,
 		ready:    true,
 		services: services,
